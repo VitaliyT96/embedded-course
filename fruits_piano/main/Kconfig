@@ -1,0 +1,29 @@
+menu "espScope Configuration"
+    config LED_BUILTIN
+        int "LED IO Pin"
+        default 15
+        help
+            LED IO pin
+
+    config BSP_CONFIG_GPIO
+        int "Factory Reset Pin (GPIO)"
+        default 9
+        help
+            GPIO pin number to hold low on boot to erase NVS (Factory Reset).
+            Default is 9 (BOOT button on Seeed XIAO ESP32C6).
+
+    config HAS_BOARD_SPECIFIC_INIT
+        bool "Include board specific init"
+        default n
+        help
+            Enable this to include a board-specific initialization file.
+
+    config BOARD_SPECIFIC_INIT
+        string "Name of file containing any board specfic initialisation"
+        depends on HAS_BOARD_SPECIFIC_INIT
+        help
+            If your board requires some specific initialization C code, place it in
+            a file called "./boards/<your board name>.h" and set this to "./boards/your board name.h"
+            Default is don't include any board-specific initialization file.
+
+endmenu
