@@ -89,8 +89,8 @@ void rmt_raw_init(int gpio, uint32_t resolution_hz) {
     uint32_t ch0conf0 = REG_READ(RMT_CH0CONF0_REG);
     ESP_LOGI(TAG, "  CH0CONF0 до: 0x%08lX", (unsigned long)ch0conf0);
 
-    uint32_t div = 80000000 / resolution_hz;
-    ESP_LOGI(TAG, "  Дільник: %lu (80MHz / %lu Hz)", (unsigned long)div, (unsigned long)resolution_hz);
+    uint32_t div = 40000000 / resolution_hz;
+    ESP_LOGI(TAG, "  Дільник: %lu (40MHz / %lu Hz)", (unsigned long)div, (unsigned long)resolution_hz);
     
     // Очищаємо поле дільника (RMT_DIV_CNT_CH0, біти 15:8)
     // Аналог: ch0conf0 &= ~RMT_DIV_CNT_CH0_M;
@@ -114,7 +114,7 @@ void rmt_raw_init(int gpio, uint32_t resolution_hz) {
     
     // Встановлюємо рівень спокою в 0 (RMT_IDLE_OUT_LV_CH0, біт 5)
     // Аналог: ch0conf0 &= ~(1 << RMT_IDLE_OUT_LV_CH0_S);
-    ch0conf0 &= ~(1 << 5); // Ставимо 0 в IDLE_OUT_LV. Очищення І-НЕ ставить нуль.
+    ch0conf0 |= (1 << 5); // Ставимо 0 в IDLE_OUT_LV. Очищення І-НЕ ставить нуль.
 
     // Вимикаємо безперервний режим (RMT_TX_CONTI_MODE_CH0, біт 3)
     // Аналог: ch0conf0 &= ~(1 << RMT_TX_CONTI_MODE_CH0_S);
