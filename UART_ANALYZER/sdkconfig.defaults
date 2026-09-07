@@ -1,0 +1,5 @@
+# Console REPL over the native USB Serial/JTAG port.
+# Makes USB-JTAG the PRIMARY console channel so
+# esp_console_new_repl_usb_serial_jtag() is compiled in.
+# UART0 is freed; UART1 (GPIO17/18) stays as the lab analyzer output.
+CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y

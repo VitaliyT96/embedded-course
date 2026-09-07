@@ -1,3 +1,3 @@
 idf_component_register(SRCS "main.c"
                     INCLUDE_DIRS "."
-                    REQUIRES rmt_raw)
+                    REQUIRES console rmt_raw)
